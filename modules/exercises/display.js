@@ -1,36 +1,43 @@
-//TODO: Export ONLY the printAll function.
+//Import modules:
+const input = require('readline-sync');
+const averages = require('./ScoreCalcs/averages.js');
+const printAll = require('./display.js');
+const randomSelect = require('./randomSelect.js');
 
-function printAll(names, tests, scores){
-  let header = 'Name';
-  let row = '';
+//Candidate data:
+let astronauts = ['Fox','Turtle','Cat','Hippo','Dog'];
 
-  for (let i = 0; i<tests.length; i++){
-    header += '\t'+tests[i];
-  }
-  console.log(header);
+const testTitles = ['Math','Fitness','Coding','Nav','Communication'];
 
-  for (let name = 0; name<names.length; name++){
-    row = names[name];
-    for (let score = 0; score<scores[name].length;score++){
-      row += '\t'+scores[name][score];
+let scores = [[95, 86, 83, 81, 76],[79, 71, 79, 87, 72],[94, 87, 87, 83, 82],[99, 77, 91, 79, 80],[96, 95, 99, 82, 70]];
+
+   //User interface:
+let prompts = ['display all scores', 'average the scores for each test', 'average the scores for each astronaut','select the next spacewalker'];
+
+for (let i = 0; i<prompts.length; i++){
+  let response = input.question(`Would you like to ${prompts[i]}? Y/N: `);
+  if (response.toLowerCase()==='y'){
+    if (i===0){
+      //Call 'printAll' here and pass in all necessary arguments.
+      console.log(printAll(astronauts, testTitles , scores));
+    } else if (i===1){
+      for (let j = 0; j<testTitles.length; j++){
+        let avg = //Call 'averageForTest' here. Pass in j and scores as arguments.
+        averages.averageForTest(j,scores);
+        console.log(`${testTitles[j]} test average = ${avg}%.`);
+      }
+    } else if (i===2){
+      for (let j = 0; j<astronauts.length; j++){
+        let avg = //Call 'averageForStudent' here. Pass in j and scores as arguments.
+        averages.averageForStudent(j,scores);
+        console.log(`${astronauts[j]}'s test average = ${avg}%.`);
+      }
+    } else {
+      let walker = //Call 'randomSelect' to pick a spacewalker from the astronauts array.
+      randomSelect(astronauts)
+      console.log(`${walker} is the next spacewalker.`);
     }
-    console.log(row);
+  } else {
+    console.log("Option skipped.");
   }
-  return;
-}
-
-function printStudentScores(index,students,tests,scores){
-  console.log(`Test results for ${students[index]}:`);
-  for (let i = 0; i<tests.length; i++){
-    console.log(`${tests[i]} = ${scores[index][i]}%.`);
-  }
-  return;
-}
-
-function printTestScores(index,test,students,scores){
-  console.log(`Class results for ${test} test:`);
-  for (let i = 0; i<students.length; i++){
-    console.log(`${students[i]} = ${scores[i][index]}%.`);
-  }
-  return;
 }
