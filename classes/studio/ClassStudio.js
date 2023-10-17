@@ -1,4 +1,22 @@
 //Declare a class called CrewCandidate with a constructor that takes three parameters—name, mass, and scores. Note that scores will be an array of test results.
+const input = require('readline-sync');
+class CrewCandidate{
+    constructor(name, mass, scores){
+        this.name = name;
+        this.mass = mass;
+        this.scores = scores;
+    }
+    addScore(){
+        
+    }
+}
+let newCandidate = new CrewCandidate("Bubba Bear", "135 kg", [88, 85, 90])
+let newCandidate1 = new CrewCandidate("Merry Maltese", " 1.5 kg", [93, 88, 97])
+let newCandidate2 = new CrewCandidate("Glad Gator", "225 kg", [75,78,62])
+console.log(newCandidate.name);
+console.log(newCandidate1.name);
+console.log(newCandidate2.name);
+
 
 
 
